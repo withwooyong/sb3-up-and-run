@@ -1,0 +1,29 @@
+### GET /coffees/all
+GET {{domain}}/coffees/all
+Content-Type: application/json
+
+### GET /coffees/{id}
+GET {{domain}}/coffees/1
+Content-Type: application/json
+
+### POST /coffees
+POST {{domain}}/coffees
+Content-Type: application/json
+
+{
+  "id": 5,
+  "name": "Cappuccino"
+}
+
+### PUT /coffees/{id}
+PUT {{domain}}/coffees/4
+Content-Type: application/json
+
+{
+  "id": 4,
+  "name": "modify"
+}
+
+### DELETE /coffees/{id}
+DELETE {{domain}}/coffees/1
+Content-Type: application/json

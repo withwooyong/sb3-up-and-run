@@ -1,0 +1,9 @@
+server:
+  port: 8080
+
+spring:
+  docker:
+    compose:
+      file: ./compose.yaml
+      #    file: ./docker-mongodb.yml
+      #    file: ./kafka

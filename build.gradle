@@ -1,0 +1,83 @@
+buildscript {
+    ext {
+        springBootVersion = '3.2.2'
+        dependencyManagementVersion = '1.1.4'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath "io.spring.gradle:dependency-management-plugin:${dependencyManagementVersion}"
+    }
+}
+
+allprojects {
+    group = 'com..example'
+//    version = '0.0.1-SNAPSHOT'
+}
+
+// 하위 모든 프로젝트 공통 세팅
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter'
+        implementation 'org.springframework.boot:spring-boot-starter-aop'
+        implementation 'org.springframework.boot:spring-boot-starter-validation'
+        compileOnly 'org.projectlombok:lombok'
+        developmentOnly 'org.springframework.boot:spring-boot-devtools'
+//        developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+        annotationProcessor 'org.projectlombok:lombok'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+    java {
+        sourceCompatibility = '17'
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
+
+project(':common') {
+    // 공통 코드
+    bootJar { enabled = false } // core 은 bootJar 로 패키징 할 필요 없음
+    jar { enabled = true }
+    dependencies {
+    }
+}
+
+project(':chapter03') {
+    bootJar { enabled = true }
+    jar { enabled = false }
+    dependencies {
+        implementation project(':common') // 컴파일 시 common project 로딩
+    }
+}
+
+project(':chapter06-redis') {
+    bootJar { enabled = true }
+    jar { enabled = false }
+//    dependencies {
+//        implementation project(':common') // 컴파일 시 common project 로딩
+//    }
+}
+
+project(':chapter06-web') {
+    bootJar { enabled = true }
+    jar { enabled = false }
+    dependencies {
+        implementation project(':common') // 컴파일 시 common project 로딩
+    }
+}
+

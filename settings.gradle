@@ -1,0 +1,6 @@
+rootProject.name = 'sb3-up-and-run'
+include 'chapter03'
+include 'common'
+include 'chapter06-redis'
+include 'chapter06-web'
+

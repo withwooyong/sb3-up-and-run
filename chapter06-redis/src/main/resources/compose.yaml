@@ -1,0 +1,9 @@
+#https://devel-repository.tistory.com/53
+#https://howtodoinjava.com/spring-boot/spring-boot-docker-compose/
+services:
+  redis:
+    image: 'redis:latest'
+    ports:
+      - '6379'
+    labels:
+      org.springframework.boot.service-connection: redis
